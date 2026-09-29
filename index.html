@@ -5,9 +5,34 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Anime Requester</title>
 </head>
 <body>
+<h1>Anime Requester</h1>
+
+    <form id="form">
+     <div>
+
+     <label for="RechercheType">Choisissez un type de recherche:</label>
+
+    <select name="rechercheType" id="RechercheType">
+        <option value="Recherche par titre">Recherche par titre</option>
+        <option value="Recherche par identifiant">Recherche par identifiant</option>
+        <option value="Recherche par classement">Recherche par classement</option>
+    </select>
+     </div>
+     <div>
+        <label for="Parametre">Paramétre:</label><br>
+
+        <input type="text" id="Parametre" name="Parametre"><br>
+     </div>
+        <input type="submit" value="Rechercher">
+        <button>Effacer</button>
+
+    </form>
+
+
+
 
 </body>
 </html>
