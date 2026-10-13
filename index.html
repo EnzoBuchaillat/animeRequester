@@ -2,14 +2,15 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Anime Requester</title>
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
-<h1>Anime Requester</h1>
+  
+  <h1>Anime Requester</h1>
 
     <form id="form">
      <div>
@@ -31,6 +32,44 @@
         <button type="reset">Effacer</button>
 
     </form>
+  
+<template id="modele-carte">
+    <div class="carte">
+        <div class="carte__media">
+            <img class="carte__image" data-champ="image"
+                 src="https://placehold.co/300x450" width="300" height="450"
+                 alt="Placeholder" loading="lazy">
+        </div>
+
+        <div class="carte__contenu">
+            <h2 class="carte__titre" data-champ="titre">Titre</h2>
+            <ul class="carte__genres" data-champ="genres" aria-label="Genres">
+                <li class="carte__badge">Genre1</li>
+                <li class="carte__badge">Genre2</li>
+                <li class="carte__badge--vide">Pas de genre renseigné</li>
+            </ul>
+
+            <dl class="carte__infos">
+                <div class="carte__info">
+                    <dt>Classement</dt>
+                    <dd data-champ="classement">#1234</dd>
+                </div>
+                <div class="carte__info">
+                    <dt>Épisodes</dt>
+                    <dd data-champ="episodes">X</dd>
+                </div>
+            </dl>
+
+            <p class="carte__synopsis" data-champ="synopsis">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                anim id est laborum.
+            </p>
+        </div>
+    </div>
+</template>
 
 
 
