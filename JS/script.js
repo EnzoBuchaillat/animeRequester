@@ -58,3 +58,11 @@ formulaire.addEventListener("submit", async (e) => {
     console.error(erreur);
   }
 });
+
+formulaire.addEventListener("reset", () => {
+  const resultats = document.getElementById("resultats");
+  if (resultats) {
+    resultats.replaceChildren(); // supprime toutes les cartes affichées
+  }
+  champParametre.focus(); // pour que l’utilisateur puisse retaper directement
+});
