@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 16px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #1f2430;
+    background-color: #f4f5f7;
+}
+
+.carte {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 832px;
+    margin-top: 0;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-left: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #e1e4ea;
+    border-radius: 12px;
+}
+
+.carte__media {
+    width: 176px;
+    max-width: 100%;
+}
+.carte__image {
+    height: auto;
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    background-color: #e9ebf0;
+}
+
+
+.carte__contenu {
+    width: 288px;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.carte__titre {
+    margin-top: 0px;
+    margin-bottom: 12px;
+    font-size: 22px;
+}
+
+.carte__genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 0;
+    margin-bottom: 12px;
+    padding: 0;
+    list-style: none;
+}
+
+.carte__badge {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 11px;
+    padding-right: 11px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3730a3;
+    background-color: #eceaff;
+    border-radius: 999px;
+}
+
+.carte__badge--vide {
+    padding-top: 2px;
+    padding-bottom: 4px;
+    padding-left: 11px;
+    padding-right: 11px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffeaef;
+    background-color: #34373e;
+    border-radius: 999px;
+}
+
+.carte__infos {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    column-gap: 32px;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.carte__info dt {
+    font-size: 14px;
+    color: #4f5666;
+}
+
+.carte__info dd {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.carte__synopsis {
+    margin: 0;
+    max-width: 600px;
+}
