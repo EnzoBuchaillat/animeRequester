@@ -9,6 +9,30 @@
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
+  
+  <h1>Anime Requester</h1>
+
+    <form id="form">
+     <div>
+
+     <label for="RechercheType">Choisissez un type de recherche:</label>
+
+    <select name="rechercheType" id="RechercheType">
+        <option value="Recherche par titre">Recherche par titre</option>
+        <option value="Recherche par identifiant">Recherche par identifiant</option>
+        <option value="Recherche par classement">Recherche par classement</option>
+    </select>
+     </div>
+     <div>
+        <label for="Parametre">Paramétre:</label><br>
+
+        <input type="text" id="Parametre" name="Parametre"><br>
+     </div>
+        <input type="submit" value="Rechercher">
+        <button type="reset">Effacer</button>
+
+    </form>
+  
 <template id="modele-carte">
     <div class="carte">
         <div class="carte__media">
@@ -48,6 +72,9 @@
 </template>
 
 
+
+
+<script src="JS/config.js"></script>
 <script src="JS/script.js"></script>
 </body>
 </html>
