@@ -9,69 +9,78 @@
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
-  
-  <h1>Anime Requester</h1>
 
-    <form id="form">
-     <div>
-
-     <label for="RechercheType">Choisissez un type de recherche:</label>
-
-    <select name="rechercheType" id="RechercheType">
-        <option value="Recherche par titre">Recherche par titre</option>
-        <option value="Recherche par identifiant">Recherche par identifiant</option>
-        <option value="Recherche par classement">Recherche par classement</option>
-    </select>
-     </div>
-     <div>
-        <label for="Parametre">Paramétre:</label><br>
-
-        <input type="text" id="Parametre" name="Parametre"><br>
-     </div>
-        <input type="submit" value="Rechercher">
-        <button type="reset">Effacer</button>
-
-    </form>
+    <h1>Anime Requester</h1>
+    <section class="recherche">
+        <form id="form">
+            <div>
+                <label for="RechercheType">Choisissez un type de recherche:</label>
+                <select name="rechercheType" id="RechercheType">
+                    <option value="Recherche par titre">Recherche par titre</option>
+                    <option value="Recherche par identifiant">Recherche par identifiant</option>
+                    <option value="Recherche par classement">Recherche par classement</option>
+                </select>
+            </div>
+            <div>
+                <label for="Parametre">Paramétre:</label><br>
+                <input type="text" id="Parametre" name="Parametre"><br>
+            </div>
+            <input type="submit" value="Rechercher">
+            <button type="reset">Effacer</button>
+        </form>
+        <details>
+            <summary class="cle-api__resume">Votre clé API</summary>
+            <form id="formCleApi" class="cle-api__champs">
+            <input type="text" id="champCleApi" class="cle-api__input"
+                   placeholder="Collez votre clé ici"
+                   aria-label="Votre clé API" autocomplete="off">
+            <button type="submit" class="cle-api__bouton">Valider</button>
+            </form>
+        </details>
+    </section>
 
     <section id="resultats" aria-live="polite"></section>
-  
-<template id="modele-carte">
-    <div class="carte">
-        <div class="carte__media">
-            <img class="carte__image" data-champ="image"
-                 src="https://placehold.co/300x450" width="300" height="450"
-                 alt="Placeholder" loading="lazy">
+
+    <template id="modele-carte">
+        <div class="carte">
+            <div class="carte__media">
+                <img class="carte__image" data-champ="image"
+                     src="https://placehold.co/300x450" width="300" height="450"
+                     alt="Placeholder" loading="lazy">
+            </div>
+
+            <div class="carte__contenu">
+                <h2 class="carte__titre" data-champ="titre">Titre</h2>
+                <ul class="carte__genres" data-champ="genres" aria-label="Genres">
+                    <li class="carte__badge">Genre1</li>
+                    <li class="carte__badge">Genre2</li>
+                    <li class="carte__badge--vide">Pas de genre renseigné</li>
+                </ul>
+
+                <dl class="carte__infos">
+                    <div class="carte__info">
+                        <dt>Classement</dt>
+                        <dd data-champ="classement">#1234</dd>
+                    </div>
+                    <div class="carte__info">
+                        <dt>Épisodes</dt>
+                        <dd data-champ="episodes">X</dd>
+                    </div>
+                </dl>
+
+                <p class="carte__synopsis" data-champ="synopsis">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex
+                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat
+                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                    mollit
+                    anim id est laborum.
+                </p>
+            </div>
         </div>
-
-        <div class="carte__contenu">
-            <h2 class="carte__titre" data-champ="titre">Titre</h2>
-            <ul class="carte__genres" data-champ="genres" aria-label="Genres">
-                <li class="carte__badge">Genre1</li>
-                <li class="carte__badge">Genre2</li>
-                <li class="carte__badge--vide">Pas de genre renseigné</li>
-            </ul>
-
-            <dl class="carte__infos">
-                <div class="carte__info">
-                    <dt>Classement</dt>
-                    <dd data-champ="classement">#1234</dd>
-                </div>
-                <div class="carte__info">
-                    <dt>Épisodes</dt>
-                    <dd data-champ="episodes">X</dd>
-                </div>
-            </dl>
-
-            <p class="carte__synopsis" data-champ="synopsis">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                anim id est laborum.
-            </p>
-        </div>
-    </div>
-</template>
+    </template>
 
 
 
