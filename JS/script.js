@@ -35,6 +35,16 @@ async function rechercherParNom(nom) {
   return reponse.data;
 }
 
+/**
+ * Recherche un anime par son identifiant.
+ * @param {string} id
+ * @returns {Promise<Array>} un tableau avec l'anime trouvé
+ */
+async function rechercherParId(id) {
+  const anime = await appelerApi(`/anime/by-id/${encodeURIComponent(id)}`);
+  return [anime];
+}
+
 const formulaire = document.getElementById("form");
 const champTypeRecherche = document.getElementById("RechercheType");
 const champParametre = document.getElementById("Parametre");
@@ -44,18 +54,21 @@ formulaire.addEventListener("submit", async (e) => {
 
   const type = champTypeRecherche.value;
   const valeur = champParametre.value.trim();
-  if (valeur == "") {
+  if (valeur === "") {
     return;
   }
 
   try {
     let animes = [];
-    if (type == "Recherche par titre") {
+    if (type === "Recherche par titre") {
       animes = await rechercherParNom(valeur);
+    } else if (type === "Recherche par identifiant") {
+      animes = await rechercherParId(valeur);
     }
     afficherAnimes(animes);
   } catch (erreur) {
     console.error(erreur);
+    afficherMessage("Aucun résultat ou erreur lors de la recherche.");
   }
 });
 
@@ -141,4 +154,4 @@ function afficherAnimes(animes) {
     animes.forEach((anime) => {
         zoneResultats.appendChild(creerCarte(anime));
     });
-}
+  }
