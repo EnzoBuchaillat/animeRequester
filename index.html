@@ -12,29 +12,31 @@
 
     <h1>Anime Requester</h1>
     <section class="recherche">
-        <form id="form">
-            <div>
-                <label for="RechercheType">Choisissez un type de recherche:</label>
-                <select name="rechercheType" id="RechercheType">
+
+        <form class="form" id="form">
+            <div class="form__groupe">
+                <label for="RechercheType">Choisissez un type de recherche :</label>
+                <select class="champ" name="rechercheType" id="RechercheType">
                     <option value="Recherche par titre">Recherche par titre</option>
                     <option value="Recherche par identifiant">Recherche par identifiant</option>
                     <option value="Recherche par classement">Recherche par classement</option>
                 </select>
             </div>
-            <div>
-                <label for="Parametre">Paramétre:</label><br>
-                <input type="text" id="Parametre" name="Parametre"><br>
+            <div class="form__groupe">
+                <label for="Parametre">Paramètre :</label>
+                <input class="champ" type="text" id="Parametre" name="Parametre">
             </div>
-            <input type="submit" value="Rechercher">
-            <button type="reset">Effacer</button>
+            <input class="bouton" type="submit" value="Rechercher">
+            <button class="bouton bouton--secondaire" type="reset">Effacer</button>
         </form>
-        <details>
+
+        <details class="cle-api">
             <summary class="cle-api__resume">Votre clé API</summary>
             <form id="formCleApi" class="cle-api__champs">
-            <input type="text" id="champCleApi" class="cle-api__input"
-                   placeholder="Collez votre clé ici"
-                   aria-label="Votre clé API" autocomplete="off">
-            <button type="submit" class="cle-api__bouton">Valider</button>
+                <input type="text" id="champCleApi" class="champ cle-api__input"
+                       placeholder="Collez votre clé ici"
+                       aria-label="Votre clé API" autocomplete="off">
+                <button type="submit" class="bouton cle-api__bouton">Valider</button>
             </form>
         </details>
     </section>
