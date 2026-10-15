@@ -190,3 +190,49 @@ label {
 .bouton--secondaire:hover {
     background-color: #dde0e7;
 }
+
+.cle-api {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid #e1e4ea;
+}
+
+.cle-api__resume {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4f5666;
+    cursor: pointer;
+}
+
+
+.cle-api__champs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 360px;
+    margin-top: 12px;
+}
+
+.cle-api__input {
+    flex: 1;
+    min-width: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 13px;
+}
+
+.cle-api__bouton {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 13px;
+    color: #4f5666;
+    background-color: #e9ebf0;
+}
+
+.cle-api__bouton:hover {
+    background-color: #dde0e7;
+}
