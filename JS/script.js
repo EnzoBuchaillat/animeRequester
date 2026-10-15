@@ -64,6 +64,8 @@ formulaire.addEventListener("submit", async (e) => {
       animes = await rechercherParNom(valeur);
     } else if (type === "Recherche par identifiant") {
       animes = await rechercherParId(valeur);
+    } else if (type === "Recherche par classement") {
+      animes = await rechercherParClassement(valeur);
     }
     afficherAnimes(animes);
   } catch (erreur) {
@@ -155,3 +157,22 @@ function afficherAnimes(animes) {
         zoneResultats.appendChild(creerCarte(anime));
     });
   }
+
+/**
+ * Recherche l'anime qui a le classement donné.
+ * @param {string} classement le rang saisi (1 = le mieux classé)
+ * @returns {Promise<Array>} un tableau avec l'anime trouvé
+ */
+async function rechercherParClassement(classement) {
+  const rang = Number(classement);
+
+  // Le rang doit être un entier à partir de 1
+  if (!Number.isInteger(rang) || rang < 1) {
+    throw new Error("Le classement doit être un entier positif.");
+  }
+
+  const reponse = await appelerApi(`/anime/by-ranking/${rang}`);
+  // L'anime est soit dans "data", soit directement dans la réponse
+  const anime = reponse.data ?? reponse;
+  return [anime];
+}
