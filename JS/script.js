@@ -1,5 +1,26 @@
 const API_HOST = "anime-db.p.rapidapi.com";
 const API_URL = `https://${API_HOST}`;
+const CLE_STOCKAGE = "cleApi";
+const formCleApi = document.getElementById("formCleApi");
+const champCleApi = document.getElementById("champCleApi");
+
+/**
+ * Renvoie la clé API enregistrée dans le sessionStorage (ou null).
+ */
+function lireCleApi() {
+  return sessionStorage.getItem(CLE_STOCKAGE);
+}
+
+formCleApi.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const cle = champCleApi.value.trim();
+  if (cle === "") {
+    return;
+  }
+  sessionStorage.setItem(CLE_STOCKAGE, cle);
+  champCleApi.value = "";
+  afficherMessage("Clé API enregistrée pour cette session.");
+});
 
 /**
  * Envoie une requête GET à l'API Anime DB et renvoie le JSON.
@@ -9,7 +30,7 @@ async function appelerApi(chemin) {
   const reponse = await fetch(API_URL + chemin, {
     method: "GET",
     headers: {
-      "x-rapidapi-key": API_KEY,
+      "x-rapidapi-key": lireCleApi(),
       "x-rapidapi-host": API_HOST,
     },
   });
@@ -55,6 +76,10 @@ formulaire.addEventListener("submit", async (e) => {
   const type = champTypeRecherche.value;
   const valeur = champParametre.value.trim();
   if (valeur === "") {
+    return;
+  }
+    if (!lireCleApi()) {
+    afficherMessage("Veuillez d'abord saisir votre clé API.");
     return;
   }
 
