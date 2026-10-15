@@ -171,8 +171,6 @@ async function rechercherParClassement(classement) {
     throw new Error("Le classement doit être un entier positif.");
   }
 
-  const reponse = await appelerApi(`/anime/by-ranking/${rang}`);
-  // L'anime est soit dans "data", soit directement dans la réponse
-  const anime = reponse.data ?? reponse;
+  const anime = await appelerApi(`/anime/by-ranking/${rang}`);
   return [anime];
 }
