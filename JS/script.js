@@ -3,6 +3,21 @@ const API_URL = `https://${API_HOST}`;
 const CLE_STOCKAGE = "cleApi";
 const formCleApi = document.getElementById("formCleApi");
 const champCleApi = document.getElementById("champCleApi");
+const messageCleApi = document.getElementById("messageCleApi");
+const detailsCleApi = document.querySelector(".cle-api");
+
+/**
+ * Affiche un message sous le champ de la clé API.
+ * @param {string} texte
+ * @param {boolean} estErreur true pour afficher le message en rouge
+ */
+function afficherStatutCle(texte, estErreur) {
+  messageCleApi.textContent = texte;
+  messageCleApi.classList.toggle("cle-api__message--erreur", estErreur);
+  if (estErreur) {
+    detailsCleApi.open = true;
+  }
+}
 
 /**
  * Renvoie la clé API enregistrée dans le sessionStorage (ou null).
@@ -15,11 +30,12 @@ formCleApi.addEventListener("submit", (e) => {
   e.preventDefault();
   const cle = champCleApi.value.trim();
   if (cle === "") {
+    afficherStatutCle("Veuillez coller votre clé API.", true);
     return;
   }
   sessionStorage.setItem(CLE_STOCKAGE, cle);
   champCleApi.value = "";
-  afficherMessage("Clé API enregistrée pour cette session.");
+  afficherStatutCle("Clé API enregistrée pour cette session.", false);
 });
 
 /**
@@ -36,7 +52,9 @@ async function appelerApi(chemin) {
   });
 
   if (!reponse.ok) {
-    throw new Error(`Erreur API : ${reponse.status}`);
+    const erreur = new Error(`Erreur API : ${reponse.status}`);
+    erreur.status = reponse.status; // pour savoir ensuite si c'est un problème de clé
+    throw erreur;
   }
   return reponse.json();
 }
@@ -78,8 +96,8 @@ formulaire.addEventListener("submit", async (e) => {
   if (valeur === "") {
     return;
   }
-    if (!lireCleApi()) {
-    afficherMessage("Veuillez d'abord saisir votre clé API.");
+  if (!lireCleApi()) {
+    afficherStatutCle("Veuillez d'abord saisir votre clé API.", true);
     return;
   }
 
@@ -93,9 +111,17 @@ formulaire.addEventListener("submit", async (e) => {
       animes = await rechercherParClassement(valeur);
     }
     afficherAnimes(animes);
+    if (messageCleApi.classList.contains("cle-api__message--erreur")) {
+      afficherStatutCle("", false);
+    }
   } catch (erreur) {
     console.error(erreur);
-    afficherMessage("Aucun résultat ou erreur lors de la recherche.");
+    if (erreur.status === 401 || erreur.status === 403) {
+      afficherStatutCle("Clé API invalide ou non abonnée à Anime DB.", true);
+      zoneResultats.replaceChildren();
+    } else {
+      afficherMessage("Aucun résultat ou erreur lors de la recherche.");
+    }
   }
 });
 

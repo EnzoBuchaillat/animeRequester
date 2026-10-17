@@ -21,7 +21,7 @@
         </label>
     </div>
     <h1>Anime Requester</h1>
-    <section class="recherche">
+    <section class="recherche" aria-label="Zone des recherches">
 
         <form class="form" id="form">
             <div class="form__groupe">
@@ -47,10 +47,11 @@
                        aria-label="Votre clé API" autocomplete="off">
                 <button type="submit" class="bouton cle-api__bouton">Valider</button>
             </form>
+            <p id="messageCleApi" class="cle-api__message" role="status" aria-live="polite"></p>
         </details>
     </section>
 
-    <section id="resultats" aria-live="polite"></section>
+    <section id="resultats" aria-live="polite" aria-label="Resultats"></section>
 
     <template id="modele-carte">
         <div class="carte">

@@ -398,3 +398,18 @@ label {
     transform: none;
 }
 
+.cle-api__message {
+    margin-top: 8px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #166534; /* vert */
+}
+
+.cle-api__message:empty {
+    display: none;
+}
+
+.cle-api__message--erreur {
+    color: #b91c1c; /* rouge */
+}
