@@ -1,32 +1,31 @@
-const API_HOST = "anime-db.p.rapidapi.com";
-const API_URL = `https://${API_HOST}`;
-const CLE_STOCKAGE = "cleApi";
+const API_URL = "https://api.tenrai.org/v1";
+/*const CLE_STOCKAGE = "cleApi";
 const formCleApi = document.getElementById("formCleApi");
 const champCleApi = document.getElementById("champCleApi");
 const messageCleApi = document.getElementById("messageCleApi");
-const detailsCleApi = document.querySelector(".cle-api");
+const detailsCleApi = document.querySelector(".cle-api");*/
 
 /**
  * Affiche un message sous le champ de la clé API.
  * @param {string} texte
  * @param {boolean} estErreur true pour afficher le message en rouge
  */
-function afficherStatutCle(texte, estErreur) {
+/*function afficherStatutCle(texte, estErreur) {
   messageCleApi.textContent = texte;
   messageCleApi.classList.toggle("cle-api__message--erreur", estErreur);
   if (estErreur) {
     detailsCleApi.open = true;
   }
-}
+}*/
 
 /**
  * Renvoie la clé API enregistrée dans le sessionStorage (ou null).
  */
-function lireCleApi() {
+/*function lireCleApi() {
   return sessionStorage.getItem(CLE_STOCKAGE);
-}
+}*/
 
-formCleApi.addEventListener("submit", (e) => {
+/*formCleApi.addEventListener("submit", (e) => {
   e.preventDefault();
   const cle = champCleApi.value.trim();
   if (cle === "") {
@@ -36,20 +35,16 @@ formCleApi.addEventListener("submit", (e) => {
   sessionStorage.setItem(CLE_STOCKAGE, cle);
   champCleApi.value = "";
   afficherStatutCle("Clé API enregistrée pour cette session.", false);
-});
+});*/
 
 /**
  * Envoie une requête GET à l'API Anime DB et renvoie le JSON.
  * @param {string} chemin ex : "/anime?page=1&size=10"
  */
 async function appelerApi(chemin) {
-  const reponse = await fetch(API_URL + chemin, {
-    method: "GET",
-    headers: {
-      "x-rapidapi-key": lireCleApi(),
-      "x-rapidapi-host": API_HOST,
-    },
-  });
+    const reponse = await fetch(API_URL + chemin, {
+        method: "GET",
+    });
 
   if (!reponse.ok) {
     const erreur = new Error(`Erreur API : ${reponse.status}`);
@@ -57,6 +52,19 @@ async function appelerApi(chemin) {
     throw erreur;
   }
   return reponse.json();
+}
+
+function adapterAnime(anime) {
+    return {
+        title: anime.title,
+        synopsis: anime.synopsis,
+        hasRanking: anime.rank != null,
+        ranking: anime.rank,
+        hasEpisode: anime.episodes != null,
+        episodes: anime.episodes,
+        image: anime.images.jpg.image_url,
+        genres: anime.genres.map((genre) => genre.name),
+    };
 }
 
 /**
@@ -67,11 +75,11 @@ async function appelerApi(chemin) {
 async function rechercherParNom(nom) {
   const parametres = new URLSearchParams({
     page: 1,
-    size: 10,
-    search: nom,
+        limit: 10,
+        q: nom,
   });
   const reponse = await appelerApi(`/anime?${parametres}`);
-  return reponse.data;
+    return reponse.data.map(adapterAnime);
 }
 
 /**
@@ -80,8 +88,8 @@ async function rechercherParNom(nom) {
  * @returns {Promise<Array>} un tableau avec l'anime trouvé
  */
 async function rechercherParId(id) {
-  const anime = await appelerApi(`/anime/by-id/${encodeURIComponent(id)}`);
-  return [anime];
+    const reponse = await appelerApi(`/anime/${encodeURIComponent(id)}`);
+    return [adapterAnime(reponse.data)];
 }
 
 const formulaire = document.getElementById("form");
@@ -96,10 +104,10 @@ formulaire.addEventListener("submit", async (e) => {
   if (valeur === "") {
     return;
   }
-  if (!lireCleApi()) {
+  /*if (!lireCleApi()) {
     afficherStatutCle("Veuillez d'abord saisir votre clé API.", true);
     return;
-  }
+  }*/
 
   try {
     let animes = [];
@@ -111,17 +119,17 @@ formulaire.addEventListener("submit", async (e) => {
       animes = await rechercherParClassement(valeur);
     }
     afficherAnimes(animes);
-    if (messageCleApi.classList.contains("cle-api__message--erreur")) {
+    /*if (messageCleApi.classList.contains("cle-api__message--erreur")) {
       afficherStatutCle("", false);
-    }
+    }*/
   } catch (erreur) {
     console.error(erreur);
-    if (erreur.status === 401 || erreur.status === 403) {
+    /*if (erreur.status === 401 || erreur.status === 403) {
       afficherStatutCle("Clé API invalide ou non abonnée à Anime DB.", true);
       zoneResultats.replaceChildren();
-    } else {
+    } else {*/
       afficherMessage("Aucun résultat ou erreur lors de la recherche.");
-    }
+    //}
   }
 });
 
@@ -160,7 +168,7 @@ function creerCarte(anime) {
     }
 
     const listeGenres = champ('genres');
-    listeGenres.replaceChildren(); 
+    listeGenres.replaceChildren();
 
     if (anime.genres && anime.genres.length > 0) {
         anime.genres.forEach((genre) => {
@@ -222,8 +230,8 @@ async function rechercherParClassement(classement) {
     throw new Error("Le classement doit être un entier positif.");
   }
 
-  const anime = await appelerApi(`/anime/by-ranking/${rang}`);
-  return [anime];
+    const reponse = await appelerApi(`/top/anime?page=${Math.ceil(rang / 25)}&limit=25`);
+    return reponse.data.filter((anime) => anime.rank === rang).map(adapterAnime);
 }
 
 
