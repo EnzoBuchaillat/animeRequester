@@ -51,6 +51,21 @@
         </details>
     </section>
 
+    <section class="recherche" aria-label="Recherche par genre">
+        <form class="form-genre" id="formGenre">
+            <fieldset class="genres">
+                <legend class="genres__titre">Recherche par genre : cochez un ou plusieurs genres</legend>
+                <div class="genres__liste" id="listeGenres">
+                    <p class="genres__message">Chargement des genres...</p>
+                </div>
+            </fieldset>
+            <div class="form-genre__boutons">
+                <input class="bouton" type="submit" value="Rechercher par genre">
+                <button class="bouton bouton--secondaire" type="reset">Effacer</button>
+            </div>
+        </form>
+    </section>
+
     <section id="resultats" aria-live="polite" aria-label="Resultats"></section>
 
     <template id="modele-carte">
@@ -95,5 +110,6 @@
     </template>
 
 <script type="module" src="JS/script.js"></script>
+<script type="module" src="JS/genres.js"></script>
 </body>
 </html>
