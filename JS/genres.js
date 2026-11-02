@@ -1,4 +1,4 @@
-// Recherche par genre (#14)
+// Recherche par genre
 
 import { appelerApi, adapterAnime } from './api.js';
 import { afficherAnimes, afficherMessage } from './affichage.js';
@@ -7,7 +7,6 @@ const formulaireGenre = document.getElementById('formGenre');
 const listeGenres = document.getElementById('listeGenres');
 const genresRetires = [26, 28]; // Girls Love, Boys Love
 
-// crée une case à cocher pour chaque genre de l'API
 async function afficherGenres() {
     try {
         const reponse = await appelerApi('/genres/anime?filter=genres');
@@ -24,7 +23,7 @@ async function afficherGenres() {
             const caseACocher = document.createElement('input');
             caseACocher.type = 'checkbox';
             caseACocher.name = 'genre';
-            caseACocher.value = genre.mal_id; // l'API cherche avec l'id
+            caseACocher.value = genre.mal_id;
 
             etiquette.appendChild(caseACocher);
             etiquette.append(genre.name);
@@ -36,7 +35,7 @@ async function afficherGenres() {
     }
 }
 
-// cherche les animes qui ont tous les genres cochés
+// l'anime doit avoir tous les genres cochés
 async function rechercherParGenre(idsGenres) {
     const parametres = new URLSearchParams({
         genres: idsGenres.join(','),
@@ -65,7 +64,7 @@ formulaireGenre.addEventListener('submit', async (e) => {
     }
 });
 
-// "Effacer" décoche déjà les cases, on vide juste les résultats
+// vide aussi les résultats
 formulaireGenre.addEventListener('reset', () => {
     document.getElementById('resultats').replaceChildren();
 });
