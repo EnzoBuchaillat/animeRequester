@@ -5,6 +5,7 @@ import { afficherAnimes, afficherMessage } from './affichage.js';
 
 const formulaireGenre = document.getElementById('formGenre');
 const listeGenres = document.getElementById('listeGenres');
+const genresRetires = [26, 28]; // Girls Love, Boys Love
 
 // crée une case à cocher pour chaque genre de l'API
 async function afficherGenres() {
@@ -13,6 +14,10 @@ async function afficherGenres() {
         listeGenres.replaceChildren(); // enlève "Chargement..."
 
         reponse.data.forEach((genre) => {
+            if (genresRetires.includes(genre.mal_id)) {
+                return; // pas de case pour ces genres
+            }
+
             const etiquette = document.createElement('label');
             etiquette.className = 'genre';
 
