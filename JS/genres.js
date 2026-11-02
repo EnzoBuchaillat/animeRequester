@@ -15,7 +15,7 @@ async function afficherGenres() {
 
         reponse.data.forEach((genre) => {
             if (genresRetires.includes(genre.mal_id)) {
-                return; // pas de case pour ces genres
+                return;
             }
 
             const etiquette = document.createElement('label');
