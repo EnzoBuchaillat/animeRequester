@@ -413,3 +413,58 @@ label {
 .cle-api__message--erreur {
     color: #b91c1c; /* rouge */
 }
+
+/* Recherche par genre (#14) */
+.form-genre {
+    margin: 0;
+}
+
+.genres {
+    min-width: 0;
+    margin: 0 0 16px 0;
+    padding: 0;
+    border: none;
+}
+
+.genres__titre {
+    margin-bottom: 8px;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sous-texte);
+}
+
+.genres__liste {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.genres__message {
+    margin: 0;
+    font-size: 14px;
+    color: var(--sous-texte);
+}
+
+.genre {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 0;
+    padding: 4px 12px;
+    font-size: 14px;
+    color: var(--texte-categorie);
+    background-color: var(--fond-categorie);
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.genre:hover {
+    background-color: var(--bouton-hover);
+}
+
+.form-genre__boutons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
