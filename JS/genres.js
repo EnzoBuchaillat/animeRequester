@@ -6,6 +6,8 @@ import { afficherAnimes, afficherMessage } from './affichage.js';
 const formulaireGenre = document.getElementById('formGenre');
 const listeGenres = document.getElementById('listeGenres');
 const genresRetires = [26, 28]; // Girls Love, Boys Love
+const champType = document.getElementById('RechercheType');
+const champParametre = document.getElementById('Parametre');
 
 async function afficherGenres() {
     try {
@@ -36,11 +38,32 @@ async function afficherGenres() {
 }
 
 // l'anime doit avoir tous les genres cochés
-async function rechercherParGenre(idsGenres) {
+// on tient compte aussi du titre ou du classement tapé en haut
+async function rechercherParGenre(idsGenres, type, valeur) {
     const parametres = new URLSearchParams({
         genres: idsGenres.join(','),
         limit: 10,
     });
+
+    if (type === 'Recherche par titre' && valeur !== '') {
+        parametres.set('q', valeur);
+    }
+
+    if (type === 'Recherche par classement' && valeur !== '') {
+        const rang = Number(valeur);
+        if (!Number.isInteger(rang) || rang < 1) {
+            throw new Error('Le classement doit être un entier positif.');
+        }
+        // le rang 1 = le mieux classé parmi ces genres
+        parametres.set('order_by', 'rank');
+        parametres.set('sort', 'asc');
+        parametres.set('limit', 25);
+        parametres.set('page', Math.ceil(rang / 25));
+        const reponse = await appelerApi(`/anime?${parametres}`);
+        const anime = reponse.data[(rang - 1) % 25];
+        return anime ? [adapterAnime(anime)] : [];
+    }
+
     const reponse = await appelerApi(`/anime?${parametres}`);
     return reponse.data.map(adapterAnime);
 }
@@ -56,7 +79,7 @@ formulaireGenre.addEventListener('submit', async (e) => {
     const ids = Array.from(cochees).map((c) => c.value);
 
     try {
-        const animes = await rechercherParGenre(ids);
+        const animes = await rechercherParGenre(ids, champType.value, champParametre.value.trim());
         afficherAnimes(animes);
     } catch (erreur) {
         console.error(erreur);
