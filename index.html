@@ -13,10 +13,10 @@
     <div class="checkbox-wrapper-35">
         <input value="private" name="switch" id="switch" type="checkbox" class="switch">
         <label for="switch">
-            <span class="switch-x-text">Dark mode is </span>
-            <span class="switch-x-toggletext">
-              <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel">Unchecked: </span>Off</span>
-              <span class="switch-x-checked"><span class="switch-x-hiddenlabel">Checked: </span>On</span>
+            <span class="switch-x-text">Mode sombre</span>
+            <span class="switch-x-toggletext" aria-hidden="true">
+              <span class="switch-x-unchecked">Désactivé</span>
+              <span class="switch-x-checked">Activé</span>
             </span>
         </label>
     </div>
@@ -33,7 +33,7 @@
                 </select>
             </div>
             <div class="form__groupe">
-                <label for="Parametre">Paramètre :</label>
+                <label for="Parametre">Titre, identifiant ou rang :</label>
                 <input class="champ" type="text" id="Parametre" name="Parametre">
             </div>
             <input class="bouton" type="submit" value="Rechercher">
@@ -49,6 +49,21 @@
             </form>
             <p id="messageCleApi" class="cle-api__message" role="status" aria-live="polite"></p>
         </details>
+    </section>
+
+    <section class="recherche" aria-label="Recherche par genre">
+        <form class="form-genre" id="formGenre">
+            <fieldset class="genres">
+                <legend class="genres__titre">Recherche par genre : cochez un ou plusieurs genres</legend>
+                <div class="genres__liste" id="listeGenres">
+                    <p class="genres__message">Chargement des genres...</p>
+                </div>
+            </fieldset>
+            <div class="form-genre__boutons">
+                <input class="bouton" type="submit" value="Rechercher par genre">
+                <button class="bouton bouton--secondaire" type="reset">Effacer</button>
+            </div>
+        </form>
     </section>
 
     <section id="resultats" aria-live="polite" aria-label="Resultats"></section>
@@ -80,7 +95,7 @@
                     </div>
                 </dl>
 
-                <p class="carte__synopsis" data-champ="synopsis">
+                <p class="carte__synopsis" data-champ="synopsis" lang="en">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                     dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
                     ex
@@ -94,6 +109,7 @@
         </div>
     </template>
 
-<script src="JS/script.js"></script>
+<script type="module" src="JS/script.js"></script>
+<script type="module" src="JS/genres.js"></script>
 </body>
 </html>
