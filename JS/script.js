@@ -50,6 +50,11 @@ formulaire.addEventListener("submit", async (e) => {
   const type = champTypeRecherche.value;
   const valeur = champParametre.value.trim();
   if (valeur === "") {
+    afficherMessage("Saisissez un titre, un identifiant ou un rang avant de lancer la recherche.");
+    return;
+  }
+  if (type === "Recherche par classement" && !/^[1-9]\d*$/.test(valeur)) {
+    afficherMessage("Le classement doit être un nombre entier positif, par exemple 1.");
     return;
   }
   /*if (!lireCleApi()) {

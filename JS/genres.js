@@ -21,6 +21,7 @@ async function afficherGenres() {
 
             const etiquette = document.createElement('label');
             etiquette.className = 'genre';
+            etiquette.lang = 'en'; // noms de genres de l'API en anglais
 
             const caseACocher = document.createElement('input');
             caseACocher.type = 'checkbox';
