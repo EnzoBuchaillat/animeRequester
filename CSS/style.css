@@ -15,8 +15,9 @@
     --sous-texte: #4f5666;
     --bouton-hover: #dcd8ff;
     --bouton-hover-effacer: #dde0e7;
+    --bouton-secondaire-hover: #dde0e7;
     --texte-switch-dark-mode: #000000;
-    --switch-dark-mode-statut: #97a19f;
+    --switch-dark-mode-statut: #4f5666;
 }
 
 .dark {
@@ -32,6 +33,7 @@
     --sous-texte: #a6adbb;
     --bouton-hover: #3a3580;
     --bouton-hover-effacer: #3a3f4b;
+    --bouton-secondaire-hover: #f3c9d4;
     --texte-switch-dark-mode: #e9ebf0;
     --switch-dark-mode-statut: #97a19f;
 }
@@ -222,7 +224,7 @@ label {
 }
 
 .bouton--secondaire:hover {
-    background-color: var(--bouton-hover-effacer);
+    background-color: var(--bouton-secondaire-hover);
 }
 
 .cle-api {
@@ -278,8 +280,22 @@ label {
     margin-bottom: 12px;
 }
 
+/* Masquée visuellement mais pas display: none, pour rester utilisable au clavier et au lecteur d'écran */
 .checkbox-wrapper-35 .switch {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.checkbox-wrapper-35 .switch:focus-visible + label {
+    outline: 3px solid var(--texte-categorie);
+    outline-offset: 4px;
 }
 
 .checkbox-wrapper-35 .switch + label {
@@ -346,7 +362,7 @@ label {
     height: 15px;
     overflow: hidden;
     position: relative;
-    width: 25px;
+    width: 5.5em;
 }
 
 .checkbox-wrapper-35 .switch + label .switch-x-unchecked,
@@ -370,11 +386,6 @@ label {
     opacity: 0;
     -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
-}
-
-.checkbox-wrapper-35 .switch + label .switch-x-hiddenlabel {
-    position: absolute;
-    visibility: hidden;
 }
 
 .checkbox-wrapper-35 .switch:checked + label::before {

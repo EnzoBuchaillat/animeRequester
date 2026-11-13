@@ -14,6 +14,7 @@ function creerCarte(anime) {
 
     champ('titre').textContent = anime.title;
     champ('synopsis').textContent = anime.synopsis || 'Pas de synopsis disponible.';
+    champ('synopsis').lang = anime.synopsis ? 'en' : 'fr'; // synopsis de l'API en anglais
     champ('classement').textContent = anime.hasRanking ? `#${anime.ranking}` : 'Non classé';
     champ('episodes').textContent = anime.hasEpisode ? anime.episodes : 'Inconnu';
 
@@ -32,6 +33,7 @@ function creerCarte(anime) {
         anime.genres.forEach((genre) => {
             const badge = document.createElement('li');
             badge.className = 'carte__badge';
+            badge.lang = 'en';
             badge.textContent = genre;
             listeGenres.appendChild(badge);
         });
